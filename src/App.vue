@@ -20,16 +20,16 @@ import people from "@/assets/data/people.json";
 
 export default {
     name: "App",
+    components: {
+        Map,
+        SideMenu,
+    },
     data() {
         return {
             selectedPerson: null,
             isUserOpenned: false,
             people: [],
         };
-    },
-    components: {
-        Map,
-        SideMenu,
     },
     created() {
         this.people = people;

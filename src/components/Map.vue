@@ -2,8 +2,14 @@
     <div class="map">
         <h3>Карта офиса</h3>
 
-        <div v-if="!isLoading" class="map-root">
-            <MapSVG ref="svg" @click="onClickMap" />
+        <div
+            v-if="!isLoading"
+            class="map-root"
+        >
+            <MapSVG
+                ref="svg"
+                @click="onClickMap"
+            />
             <Table
                 v-show="false"
                 ref="table"

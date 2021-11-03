@@ -83,10 +83,6 @@ export default {
             type: Object,
             default: null,
         },
-        tableId: {
-            type: Number,
-            default: null,
-        },
     },
     components: {
         LegendItem,
