@@ -1,7 +1,10 @@
 <template>
     <div id="app">
         <div class="office">
-            <Map @table-click="tableClick"/>
+            <Map
+                @open-user="openUser"
+                @close-user="closeUser"
+            />
             <SideMenu
                 :person="selectedPerson"
                 :isUserOpenned.sync="isUserOpenned"
@@ -21,20 +24,25 @@ export default {
         return {
             selectedPerson: null,
             isUserOpenned: false,
+            people: [],
         };
     },
     components: {
         Map,
         SideMenu,
     },
+    created() {
+        this.people = people;
+    },
     methods: {
-        tableClick(id) {
-            console.log("--id", id);
-            this.selectedTableId = id;
-            this.selectedPerson = people.find((it) => it.tableId === id);
+        openUser(id) {
+            this.selectedPerson = this.people.find((it) => it.tableId === id);
             this.isUserOpenned = true;
         },
-    }
+        closeUser() {
+            this.isUserOpenned = false;
+        },
+    },
 };
 </script>
 

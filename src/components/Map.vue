@@ -3,11 +3,10 @@
         <h3>Карта офиса</h3>
 
         <div v-if="!isLoading" class="map-root">
-            <MapSVG ref="svg" />
+            <MapSVG ref="svg" @click="onClickMap" />
             <Table
                 v-show="false"
                 ref="table"
-                v-click-outside="hide"
             />
         </div>
         <div v-else>Loading...</div>
@@ -20,15 +19,11 @@ import tables from "@/assets/data/tables.json";
 import legend from "@/assets/data/legend.json";
 import Table from "@/assets/images/workPlace.svg";
 import MapSVG from "@/assets/images/map.svg";
-import ClickOutside from "vue-click-outside";
 
 export default {
     components: {
         MapSVG,
         Table,
-    },
-    directives: {
-        ClickOutside,
     },
     data() {
         return {
@@ -59,13 +54,11 @@ export default {
     },
     methods: {
         drawTables() {
-            // создаем группу для рабочих мест
             const svgTablesGroupPlace = this.g
                 .append("g")
                 .classed("groupPlaces", true);
 
             this.tables.map((table) => {
-                // создает группу для рабочего стола
                 const targetSeat = svgTablesGroupPlace
                     .append("g")
                     .attr(
@@ -74,8 +67,8 @@ export default {
                     )
                     .attr("id", table._id)
                     .classed("employer-place", true)
-                    .on("click", this.tableClicked);
-                // устанавливает стол в группу
+                    .on("click", this.onClickTable);
+
                 targetSeat
                     .append("g")
                     .attr("transform", `rotate(${table.rotate || 0})`)
@@ -83,23 +76,19 @@ export default {
                     .classed("table", true)
                     .html(this.tableSVG.html())
                     .attr(
-                        // устанавливаем цвет подразделения
                         "fill",
                         legend.find((it) => it.group_id === table.group_id)
                             ?.color ?? "transparent"
                     );
             });
         },
-        tableClicked(event) {
-            console.log("event.currentTarget", event.currentTarget.id);
-            this.$emit("table-click", Number(event.currentTarget.id));
+        onClickTable(event) {
+            this.$emit("open-user", Number(event.currentTarget.id));
         },
-        hide() {
-            console.log("----hide");
-            // this.isUserOpenned = false;
-            // if (this.selectedPerson) {
-            //     this.selectedPerson = null;
-            // }
+        onClickMap(event) {
+            if (!event.target.classList.contains("wrapper-table")) {
+                this.$emit("close-user", null);
+            }
         },
     },
 };

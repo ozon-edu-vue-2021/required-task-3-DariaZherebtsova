@@ -10,12 +10,15 @@
             <div class="person__info-name">
                 <b>{{ person.name }} ({{ person.age }})</b>
             </div>
-
-            <div class="person__info-email"><b>Почта:</b>{{ person.email }}</div>
+            <div class="person__info-email">
+                <b>Почта:</b>{{ person.email }}
+            </div>
             <div class="person__info-registration-date">
                 <b>Дата регистрации:</b>{{ formatedDate }}
             </div>
-            <div class="person__info-about"><b>О себе:</b>{{ person.about }}</div>
+            <div class="person__info-about">
+                <b>О себе:</b>{{ person.about }}
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +36,6 @@ export default {
     computed: {
         formatedDate() {
             return format(parseISO(this.person.registered), "dd.MM.yyyy hh:mm");
-            // return this.person.registered;
         },
     },
 };

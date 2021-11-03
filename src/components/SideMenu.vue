@@ -60,7 +60,7 @@
                     Место пустое
                 </div>
 
-                <PersonCard :person="person" />
+                <PersonCard v-else :person="person" />
             </div>
         </div>
     </div>
