@@ -19,7 +19,7 @@
         </div>
         <div class="content">
             <div
-                v-if="!isUserOpenned"
+                v-show="!isUserOpenned"
                 class="legend"
             >
                 <div class="legend__data">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div
-                v-else
+                v-show="isUserOpenned"
                 class="profile"
             >
                 <div

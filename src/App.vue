@@ -41,6 +41,7 @@ export default {
         },
         closeUser() {
             this.isUserOpenned = false;
+            this.selectedPerson = null;
         },
     },
 };

@@ -72,8 +72,7 @@ export default {
                         `translate(${table.x}, ${table.y}) scale(0.5)`
                     )
                     .attr("id", table._id)
-                    .classed("employer-place", true)
-                    .on("click", this.onClickTable);
+                    .classed("employer-place", true);
 
                 targetSeat
                     .append("g")
@@ -88,11 +87,12 @@ export default {
                     );
             });
         },
-        onClickTable(event) {
-            this.$emit("open-user", Number(event.currentTarget.id));
-        },
         onClickMap(event) {
-            if (!event.target.classList.contains("wrapper-table")) {
+            const table = event.target.closest(".employer-place");
+
+            if (table) {
+                this.$emit("open-user", Number(table.id));
+            } else {
                 this.$emit("close-user", null);
             }
         },
